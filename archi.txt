@@ -1,5 +1,0 @@
-- page gradio de test
-- Page MLFlow de monitoring
-- Page API monitoring
-- Page de gestion des log et détection de problèmes
-- Page de gestion du dataset
