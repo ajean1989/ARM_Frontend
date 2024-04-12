@@ -4,11 +4,14 @@ import React from 'react';
 import Link from 'next/link'
 import { useState } from 'react';
 import { getEnabledExperimentalFeatures } from 'next/dist/server/config';
+import { getSessionData } from '../app/lib/cookies'
+// import { navItems } from 'middleware';
 
-const navItems = ["Home", "Try it", "Dataset", "Model monitoring", "API monitoring", "Logs"]    
+
+const navItems = ["Home", "Try it", "Dataset", "Model monitoring", "API monitoring", "Logs"] 
 
 const Nav = () => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(true);
   const [isContent, setIsContent] = useState("Home");
       
   // Evénements qui ouvre/ferme la nav + récupère le titre cliqué pour l'afficher en haut de la nav
