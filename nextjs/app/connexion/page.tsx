@@ -3,7 +3,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { redirect } from 'next/navigation'
-import { handleLogin } from '../lib/action'
+import { setcookie } from '../lib/action'
 
 
 const loginAction = async (formData) => {
@@ -22,14 +22,15 @@ const loginAction = async (formData) => {
         body: formData
     })
 
-        const jsonData = await response.json();
-        if (jsonData.succes === true) {
-
-            handleLogin(jsonData)
-        }
+    const jsonData = await response.text();
+    const data = JSON.parse(jsonData)
+    if (data.success === true) {
+        console.log(jsonData)
+        setcookie(jsonData)
+    }
         // const a = handleLogin(jsonData)
 
-        // redirect(`/home`) // Navigate to the new post page
+        redirect(`/`) // Navigate to the new post page
     
     };
 

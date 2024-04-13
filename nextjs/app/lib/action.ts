@@ -2,7 +2,7 @@
  
 import { cookies } from 'next/headers'
  
-export async function handleLogin(sessionData) {
+export async function setcookie(sessionData) {
   //const encryptedSessionData = encrypt(sessionData) // Encrypt your session data
   cookies().set('session', sessionData, {
     httpOnly: true,
@@ -10,5 +10,10 @@ export async function handleLogin(sessionData) {
     maxAge: 60 * 60 * 24 * 7, // One week
     path: '/',
   })
+  // Redirect or handle the response after setting the cookie
+}
+
+export async function deleteSession() {
+  cookies().delete('session');
   // Redirect or handle the response after setting the cookie
 }
