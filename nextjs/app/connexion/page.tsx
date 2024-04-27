@@ -25,7 +25,6 @@ const loginAction = async (formData) => {
     const jsonData = await response.text();
     const data = JSON.parse(jsonData)
     if (data.success === true) {
-        console.log(jsonData)
         setcookie(jsonData)
     }
         // const a = handleLogin(jsonData)

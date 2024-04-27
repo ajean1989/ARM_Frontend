@@ -1,22 +1,12 @@
 import { cookies } from 'next/headers'
  
 export function getSessionData() {
-  // const SessionData = cookies().get('session')?.value
   const SessionData = cookies().get('session')?.value
-  // console.log(typeof(SessionData))
-  // console.log(SessionData)
-  console.log('---')
-  console.log('1',SessionData)
-  console.log('2',typeof(SessionData))
-  // console.log('3',JSON.parse(SessionData))
   return SessionData ? JSON.parse(SessionData) : null
-  // return SessionData ? SessionData : null
 }
 
 
 import type { NextRequest } from 'next/server'
- 
-
 
 export async function middleware(request: NextRequest) {
   const currentUser = getSessionData()

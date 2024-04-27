@@ -11,7 +11,7 @@ const Footer = () => {
       <ul className='flex justify-around'>
         <li>Mentions légales</li>
         <li><Link href="/contact">Contact</Link></li>
-        <li>{session?.success ? <Link href="/deconnexion">Déconnexion</Link> : <Link href="/connexion">'Connexion'</Link>}</li>
+        <li>{session?.success ? <Link href="/deconnexion">Déconnexion</Link> : <Link href="/connexion">Connexion</Link>}</li>
       </ul>
     </footer>
   );

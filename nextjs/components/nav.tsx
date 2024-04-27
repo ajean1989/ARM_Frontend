@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link'
 import { useState } from 'react';
 import { getEnabledExperimentalFeatures } from 'next/dist/server/config';
-import { getSessionData } from '../app/lib/cookies'
 // import { navItems } from 'middleware';
 
 
@@ -28,13 +27,19 @@ const Nav = () => {
 
       <ul className={`*:text-center ${isClicked ? 'hidden' : 'block'}`}>
         
-        {navItems.map((navItems) => (
+        {/* {navItems.map((navItems) => (
             <li key={navItems} onClick={handleClick}>
                 <Link href={`${navItems.toLowerCase() == "home" ? "/" : "/" + navItems.toLowerCase().replace(/\s+/g, '-')}`}>
                     {navItems}
                 </Link>
             </li>
-            ))}
+            ))} */}
+        <li onClick={handleClick}><Link href={"/"}>Home</Link></li>
+        <li><Link href={"http://localhost/gradio/"} target='_blank'>Try-it</Link></li>
+        <li onClick={handleClick}><Link href={"/dataset"}>Dataset</Link></li>
+        <li><Link href={"http://localhost/mlflow/"} target='_blank'>Model monitoring</Link></li>
+        <li><Link href={"http://localhost/mlflow/"} target='_blank'>API monitoring</Link></li>
+        <li onClick={handleClick}><Link href={"/logs"}>Logs</Link></li>
 
       </ul>
     </nav>

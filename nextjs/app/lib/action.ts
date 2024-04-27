@@ -1,6 +1,8 @@
-'use server'
+"use server"
  
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+
  
 export async function setcookie(sessionData) {
   //const encryptedSessionData = encrypt(sessionData) // Encrypt your session data
@@ -14,6 +16,8 @@ export async function setcookie(sessionData) {
 }
 
 export async function deleteSession() {
+  console.log('heyeyy')
   cookies().delete('session');
   // Redirect or handle the response after setting the cookie
+  redirect('/')
 }
