@@ -2,7 +2,7 @@ services:
 
   nextjs:
     labels:
-        - traefik.http.routers.nextjs.rule= Host(`traefik`) && PathPrefix(`/`) && (!PathPrefix(`/gradio`) || !PathPrefix(`/mlflow`) || !PathPrefix(`/grafana`))
+        - traefik.http.routers.nextjs.rule= Host(`traefik`) && PathPrefix(`/`)
         - traefik.http.routers.nextjs-tls.tls.domains[0].main=traefik
         - traefik.http.routers.nextjs-tls.tls.domains[0].sans=traefik
         - traefik.http.routers.nextjs.priority=1
