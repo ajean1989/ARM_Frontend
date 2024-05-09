@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link'
 import { useState } from 'react';
 import { getEnabledExperimentalFeatures } from 'next/dist/server/config';
-import { getEnvironment } from '../app/lib/getEnv'
 import { permanent_dns, dev_dns } from '../app/lib/link_dev'
 import navBtn from './btn_nav';
 

@@ -1,6 +1,5 @@
 'use client';
 import React from 'react'
-import { getEnvironment } from '../lib/getEnv'
 import { permanent_dns, dev_dns } from '../lib/link_dev'
 
 

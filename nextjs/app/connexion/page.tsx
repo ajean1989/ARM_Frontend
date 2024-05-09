@@ -4,7 +4,6 @@ import React from 'react';
 import { useState } from 'react';
 import { redirect } from 'next/navigation'
 import { setcookie } from '../lib/action'
-import { getEnvironment } from '../lib/getEnv'
 import { permanent_dns, dev_dns } from '../lib/link_dev'
 import { useRouter } from 'next/navigation'
 import { revalidatePath } from 'next/cache'

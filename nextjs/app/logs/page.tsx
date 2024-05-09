@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {useState, useEffect} from 'react';
-import { getEnvironment } from 'app/lib/getEnv';
 import { permanent_dns, dev_dns } from '../lib/link_dev'
 
 
