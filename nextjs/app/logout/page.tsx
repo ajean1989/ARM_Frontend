@@ -1,9 +1,12 @@
+export const dynamic = 'force-dynamic'
+
 import React from 'react';
 
-export default function ContactPage() {
+
+export default function LogoutPage() {
     return (
       <div className='bg-my-yellow rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4'>
-        <p>ad.jacquenet@gmail.com</p>
+        <p>logout</p>
       </div>
     )
   }

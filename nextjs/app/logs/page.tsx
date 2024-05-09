@@ -2,19 +2,22 @@
 
 import React from 'react';
 import {useState, useEffect} from 'react';
+import { getEnvironment } from 'app/lib/getEnv';
+import { permanent_dns, dev_dns } from '../lib/link_dev'
 
 
-export default function Page() {
+export default function LogPage() {
 
   const [logContent, setLogContent] = useState('');
 
+
   useEffect(() => {
-    fetch('http://localhost/api-backend/logs/api-ia/',{
+    fetch(`https://${permanent_dns}/api-backend/logs/api-ia/`,{
       method:"GET",
       mode:"cors",
       credentials:"include",
       headers: {
-          'X-API-Key': 'blabla'
+        'X-API-Key': process.env.ARM_VPS1_API_KEY
         }
       })
       .then((response) => response.json())

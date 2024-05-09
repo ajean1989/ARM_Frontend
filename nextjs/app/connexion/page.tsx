@@ -1,37 +1,64 @@
-"use client";
+export const dynamic = 'force-dynamic'
 
 import React from 'react';
 import { useState } from 'react';
 import { redirect } from 'next/navigation'
 import { setcookie } from '../lib/action'
+import { getEnvironment } from '../lib/getEnv'
+import { permanent_dns, dev_dns } from '../lib/link_dev'
+import { useRouter } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
+
+
 
 
 const loginAction = async (formData) => {
+    'use server'
     // const [username, setUsername] = useState('');
     // const [password, setPassword] = useState('');
 
     // const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     //     e.preventDefault();
-    const response = await fetch('http://localhost/api-backend/authenticate/',{
-        method:"POST",
-        mode:"cors",
-        credentials:"include",
-        headers: {
-            'X-API-Key': 'blabla'
-        },
-        body: formData
-    })
-
-    const jsonData = await response.text();
-    const data = JSON.parse(jsonData)
-    if (data.success === true) {
-        setcookie(jsonData)
-    }
-        // const a = handleLogin(jsonData)
-
-        redirect(`/`) // Navigate to the new post page
     
-    };
+    // const dns = (process.env.NODE_ENV === "production") ? "jacquenet.com" : "jacquenen"  
+    // const dns = "traefik"
+
+
+
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+    
+    
+    console.log(`https://${permanent_dns}/api-backend/authenticate/`)
+
+    try{
+        const response = await fetch(`https://${permanent_dns}/api-backend/authenticate/`,{
+            method:"POST",
+            mode:"cors",
+            credentials:"include",
+            headers: {
+                'X-API-Key': process.env.ARM_VPS1_API_KEY
+            },
+            body: formData,
+        
+        })
+
+        const dataFetch = await response.text()
+        console.log("response connexion : ", dataFetch)
+
+        const jsonData = dataFetch;
+        const data = JSON.parse(jsonData)
+        if (data.success === true) {
+            setcookie(jsonData)
+        }
+            // const a = handleLogin(jsonData)
+    }
+    catch(err){
+        console.log(err)
+    }
+      
+
+
+};
 
 
 

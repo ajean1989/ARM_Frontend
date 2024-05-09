@@ -1,0 +1,142 @@
+name: ARM_Backend CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+  
+jobs:
+  # build:
+  #   runs-on: ubuntu-latest
+    
+  #   environment: my-env
+  #   env:
+  #     ARM_VPS1_API_KEY: ${{ secrets.ARM_VPS1_API_KEY }}
+  #     PWD_MARIADB: ${{ secrets.PWD_MARIADB }}
+  #     PWD_MONGODB: ${{ secrets.PWD_MONGODB }}
+  #     SERVER_VPS1_IP: ${{ secrets.SERVER_VPS1_IP }}
+  #     USER_MARIADB: ${{ secrets.USER_MARIADB }}
+  #     USER_MONGODB: ${{ secrets.USER_MONGODB }}
+
+
+  #   steps:
+  #     - name: Checkout main repository
+  #       uses: actions/checkout@v4
+
+  #     - name: info
+  #       run: pwd && ls -l
+
+  #     - name: Clone "repo" repository
+  #       run: cd .. && git clone https://github.com/ajean1989/ARM_Starter.git && pwd
+
+  #     - name: info
+  #       run: pwd && ls -l
+
+  #     - name: lancer le starter kit
+  #       run: cd ../ARM_Starter && bash ./run/build.sh
+
+  #     - name: execute api container
+  #       run: pwd && ls && bash ./run/build.sh
+
+  # tests:
+  #   runs-on: ubuntu-latest
+    
+  #   environment: my-env
+  #   env:
+  #     ARM_VPS1_API_KEY: ${{ secrets.ARM_VPS1_API_KEY }}
+  #     PWD_MARIADB: ${{ secrets.PWD_MARIADB }}
+  #     PWD_MONGODB: ${{ secrets.PWD_MONGODB }}
+  #     SERVER_VPS1_IP: ${{ secrets.SERVER_VPS1_IP }}
+  #     USER_MARIADB: ${{ secrets.USER_MARIADB }}
+  #     USER_MONGODB: ${{ secrets.USER_MONGODB }}
+  #     SSH_PRIVATE_KEY_VPS1: ${{ secrets.SSH_PRIVATE_KEY_VPS1 }}
+
+
+  #   steps:
+  #     - name: Checkout main repository
+  #       uses: actions/checkout@v4
+
+  #     - name: info
+  #       run: pwd && ls -l
+
+  #     - name: Clone "repo" repository
+  #       run: cd .. && git clone https://github.com/ajean1989/ARM_Starter.git
+      
+  #     - name: create volume 
+  #       run: cd .. && mkdir -p volumes/mariadb/init
+
+  #     - name: private key copy
+  #       run: mkdir ~/.ssh && echo "$SSH_PRIVATE_KEY_VPS1" > ~/.ssh/id_test && sudo chmod 600 ~/.ssh/id_test
+
+  #     - name: retrieve init.db
+  #       run: cd .. && scp -i ~/.ssh/id_test -o StrictHostKeyChecking=no debian@$SERVER_VPS1_IP:/home/debian/ARMarket/volumes/mariadb/init/* ./volumes/mariadb/init/
+
+  #     - name: lancer le starter kit
+  #       run: cd ../ARM_Starter && bash ./run/build.sh
+
+  #     - name: wait util all starter container were on
+  #       run: sleep 60
+
+  #     - name: execute api container
+  #       run: pwd && ls && bash ./run/tests.sh
+
+  #     - name: Run tests unitaires
+  #       run: |
+  #         docker exec api-backend python -m pytest
+
+  #     - name: Run tests fontionnels
+  #       run: |
+  #         docker exec tests-api-backend python -m pytest
+
+
+
+  deploy:
+    needs: tests
+    runs-on: ubuntu-latest
+
+    environment: my-env
+    env:
+      ARM_VPS1_API_KEY: ${{ secrets.ARM_VPS1_API_KEY }}
+      PWD_MARIADB: ${{ secrets.PWD_MARIADB }}
+      PWD_MONGODB: ${{ secrets.PWD_MONGODB }}
+      SERVER_VPS1_IP: ${{ secrets.SERVER_VPS1_IP }}
+      USER_MARIADB: ${{ secrets.USER_MARIADB }}
+      USER_MONGODB: ${{ secrets.USER_MONGODB }}
+      SSH_PRIVATE_KEY_VPS1: ${{ secrets.SSH_PRIVATE_KEY_VPS1 }}
+      SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: info
+      run: pwd && ls && echo "----" && printenv
+
+    - name: private key copy
+      run: mkdir ~/.ssh && echo "$SSH_PRIVATE_KEY_VPS1" > ~/.ssh/id_test && sudo chmod 600 ~/.ssh/id_test
+
+
+    - name: rm nextjs active container
+      run: cat ~/.ssh/id_test && ssh -i ~/.ssh/id_test -o StrictHostKeyChecking=no debian@$SERVER_VPS1_IP "if [docker container ps -a | grep -q 'nextjs']; then docker rm -f nextjs; fi"
+
+    - name: Copy api files
+      run: scp -i ~/.ssh/id_test -r ./nextjs/* debian@$SERVER_VPS1_IP:/home/debian/ARMarket/ARM_Frontend/nextjs
+
+    - name: Copy run file
+      run: scp -i ~/.ssh/id_test ./run/build.sh debian@$SERVER_VPS1_IP:/home/debian/ARMarket/ARM_Frontend/build.sh
+        
+
+    - name: run containers
+      run: |
+        ssh -i ~/.ssh/id_test -o StrictHostKeyChecking=no debian@$SERVER_VPS1_IP "export ARM_VPS1_API_KEY=$ARM_VPS1_API_KEY \
+        && export PWD_MARIADB=$PWD_MARIADB \
+        && export PWD_MONGODB=$PWD_MONGODB \
+        && export SERVER_VPS1_IP=$SERVER_VPS1_IP \
+        && export USER_MARIADB=$USER_MARIADB \
+        && export USER_MONGODB=$USER_MONGODB \
+        && export NODE_ENV=PROD \
+        && cd /home/debian/ARMarket/ARM_Frontend/ \
+        && bash build.sh"
+

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next'
 
-export let navName : string = "Home"
+// export let navName : string = "Home"
   
 export const metadata: Metadata = {
   title: 'ARM - Home',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 
 // `app/page.tsx` is the UI for the `/` URL
-export default function Page() {
+export default function IndexPage() {
     return (
       <div className='bg-my-yellow rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4'>
         <div>

@@ -1,8 +1,12 @@
 'use client';
-import React from 'react';
+import React from 'react'
+import { getEnvironment } from '../lib/getEnv'
+import { permanent_dns, dev_dns } from '../lib/link_dev'
+
+
 
 async function DownloadDataset() {
-  const res = await fetch('http://localhost/api-ia/dataset/0',{
+  const res = await fetch(`http://${permanent_dns}/api-ia/dataset/0`,{
     method:"GET",
     mode:"cors",
     credentials:"include",
@@ -24,7 +28,7 @@ async function DownloadDataset() {
  return blob
 }
 
-export default function Page() {
+export default function DatasetPage() {
     return (
       <div className='bg-my-yellow rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4'>
         <p>Dataset</p>
