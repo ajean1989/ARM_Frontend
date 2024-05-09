@@ -2,7 +2,7 @@ services:
 
   nextjs:
     labels:
-      - traefik.http.routers.nextjs.rule= Host(`jacquenet.com`) && PathPrefix(`/`)
+      - traefik.http.routers.nextjs.rule= Host(`jacquenet.com`) && PathPrefix(`/`) && (!PathPrefix(`/gradio`) || !PathPrefix(`/mlflow`) || !PathPrefix(`/grafana`))
       - traefik.http.routers.nextjs.tls.certresolver=myresolver
       - traefik.http.routers.nextjs-tls.tls.domains[0].main=jacquenet.com
       - traefik.http.routers.nextjs.priority=1
