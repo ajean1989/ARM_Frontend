@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'
 
 import React from 'react';
 import Link from 'next/link'
-import { getSessionData } from 'middleware'
+import { getSessionData } from '../middleware'
 // import { deleteSession } from 'app/lib/action';
 import LogBtn from './button_log';
 
