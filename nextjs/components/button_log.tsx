@@ -17,12 +17,12 @@ const LogBtn = (props) => {
 
         return (
             <span>
-            {session?.success ? (
+            {/* {session?.success ? (
                 <button onClick={handleClick}><Link href="/logout">Déconnexion</Link></button>
             ) : (
                 <button onClick={handleClick}><Link href="/connexion">Connexion</Link></button>
-            )}
-            {/* <button onClick={handleClick}><Link href="/connexion">Connexion</Link></button> */}
+            )} */}
+            <button onClick={handleClick}><Link href="/connexion">Connexion</Link></button>
             </span>
         )
     }
