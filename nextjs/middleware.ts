@@ -45,7 +45,6 @@ export async function middleware(request: NextRequest) {
       // console.log("b :", b)
       // console.log("all :", response.cookies.getAll())
       // return Response.redirect(new URL('/', request.url))
-      
       const response = NextResponse.redirect(new URL('/connexion', request.url))
       await response.cookies.delete('session')
       return response

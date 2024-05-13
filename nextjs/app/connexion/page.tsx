@@ -7,6 +7,7 @@ import { setcookie } from '../lib/action'
 import { permanent_dns, dev_dns } from '../lib/link_dev'
 import { useRouter } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 
 
 
@@ -54,6 +55,9 @@ const loginAction = async (formData) => {
     catch(err){
         console.log(err)
     }
+    
+    revalidateTag('connexion')
+    redirect(`/`)
       
 
 
