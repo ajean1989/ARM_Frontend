@@ -5,12 +5,12 @@ import { permanent_dns, dev_dns } from '../lib/link_dev'
 
 
 async function DownloadDataset() {
-  const res = await fetch(`http://${permanent_dns}/api-ia/dataset/0`,{
+  const res = await fetch(`https://${permanent_dns}/api-ia/dataset/0`,{
     method:"GET",
     mode:"cors",
     credentials:"include",
     headers: {
-      'X-API-Key': 'blabla'
+      'X-API-Key': process.env.ARM_VPS1_API_KEY
     }})
   const blob = await res.blob();
   const url = window.URL.createObjectURL(blob);
