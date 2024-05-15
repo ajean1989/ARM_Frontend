@@ -14,12 +14,12 @@
     }
 
     body {
-        @apply h-screen font-inter text-brown-text;
+        @apply h-screen font-inter text-normal-text;
     }
 
     
     h1 {
-      @apply text-xl;
+      @apply text-xl text-orange-text;
     }
 
   }

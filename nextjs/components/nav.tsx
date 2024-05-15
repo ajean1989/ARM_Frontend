@@ -28,7 +28,7 @@ const Nav = () => {
 
 
   return (
-    <nav className='bg-my-yellow-50 absolute top-20 w-full flex flex-col justify-center hover:cursor-pointer'>
+    <nav className='bg-encart absolute top-20 w-full flex flex-col justify-center hover:cursor-pointer'>
 
       <p id="home" className='text-center hover:font-semibold' onClick={handleClick}>Menu</p>
 

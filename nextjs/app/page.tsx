@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 // `app/page.tsx` is the UI for the `/` URL
 export default function IndexPage() {
     return (
-      <div className='bg-my-yellow rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4'>
+      <div className='bg-encart rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4'>
         <div>
           <div className="flex items-center justify-center">
-            <h1 >Projet E4 de la certification de développeur en intelligence artificielle Simplon</h1>
+            {/* <h1 >Projet E4 de la certification de développeur en intelligence artificielle Simplon</h1> */}
           </div>
           <br />
           <p>Cette application permet de tester le modèle d'IA. Ce modèle permet, grâce à l'image d'un article, d'obtenir son code barre (identifiant international unique).</p>

@@ -67,7 +67,7 @@ const loginAction = async (formData) => {
 
 const LoginPage = async () => {
     return (
-      <div className='bg-my-yellow rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4 flex justify-center'>
+      <div className='bg-encart rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4 flex justify-center'>
             <form action={loginAction}>
                 <div className="flex flex-col justify-center">
                     <label className='text-center'>e-mail</label>

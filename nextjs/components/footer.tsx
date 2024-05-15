@@ -28,11 +28,11 @@ const Footer = async () => {
     const session = getSessionData()
 
     return (
-      <footer className='bg-my-yellow h-20 flex flex-col justify-center'>
+      <footer className='bg-my-blue h-20 flex flex-col justify-center'>
         <ul className='flex justify-around'>
-          <li>Mentions légales</li>
-          <li><Link href="/contact">Contact</Link></li>
-          <li><LogBtn data={session} /></li>
+          <li className='text-orange-text'>Mentions légales</li>
+          <li className='text-orange-text'><Link href="/contact">Contact</Link></li>
+          <li className='text-orange-text'><LogBtn data={session} /></li>
         </ul>
       </footer>
     );

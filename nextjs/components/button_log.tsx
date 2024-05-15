@@ -22,7 +22,7 @@ const LogBtn = (props) => {
             ) : (
                 <button onClick={handleClick}><Link href="/connexion">Connexion</Link></button>
             )} */}
-            <button onClick={handleClick}><Link href="/connexion">Connexion</Link></button>
+            <button onClick={handleClick}><Link href="/connexion">Login</Link></button>
             </span>
         )
     }

@@ -29,7 +29,7 @@ async function DownloadDataset() {
 
 export default function DatasetPage() {
     return (
-      <div className='bg-my-yellow rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4'>
+      <div className='bg-encart rounded-xl w-4/5 m-auto p-4 my-20 md:w-3/4'>
         <p>Dataset</p>
         <button onClick={DownloadDataset}>Télécharger le dataset</button>
         <p>Le téléchargement met plusieurs minutes à démarrer. En effet, pour le moment la mise en forme au format YOLO et la compression des images se fait à la volée.</p>
